@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
+fs = require('fs');
 
 program
   .version('0.1.0')
@@ -10,9 +11,10 @@ program
   .parse(process.argv);
 
 console.log('you ordered:');
-if (program.spicy)
+createFolder('ordered');
+if (program.spicy) {
   console.log('要辣辣');
-else
+} else
   console.log('不要辣辣');
 
 if (program.parsley)
@@ -20,3 +22,12 @@ if (program.parsley)
 else
   console.log('我不要香菜');
 console.log('給我一杯 %s', program.teatype);
+
+function createFolder(folderName) {
+  fs.mkdir('./'+ folderName, (err) => {
+    if (err)
+      console.log(err);
+    else
+      console.log('./' + folderName + ' has generated');
+  });
+}
