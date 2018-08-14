@@ -13,21 +13,40 @@ program
 console.log('you ordered:');
 createFolder('ordered');
 if (program.spicy) {
+  createFile('要辣辣.txt', '真的要辣辣')
   console.log('要辣辣');
-} else
-  console.log('不要辣辣');
+} else {
 
-if (program.parsley)
+  createFile('不要辣辣.txt', '真的不要辣辣')
+  console.log('不要辣辣');
+}
+
+if (program.parsley) {
+
+  createFile('要香菜.txt', '真的要香菜')
   console.log('我要香菜');
-else
+} else {
+  createFile('不要香菜.txt', '真的要不香菜')
   console.log('我不要香菜');
-console.log('給我一杯 %s', program.teatype);
+}
+giveMeDrink = '給我一杯 ' + program.teatype;
+createFile(giveMeDrink + ".txt", giveMeDrink)
+console.log(giveMeDrink);
 
 function createFolder(folderName) {
-  fs.mkdir('./'+ folderName, (err) => {
+  fs.mkdir('./' + folderName, (err) => {
     if (err)
       console.log(err);
     else
       console.log('./' + folderName + ' has generated');
+  });
+}
+
+function createFile(fileName, fileContent) {
+  fs.writeFile('./ordered/' + fileName, fileContent, (err) => {
+    if (err)
+      console.log(err);
+    else
+      console.log('file:%s', fileName + ' has generated');
   });
 }
